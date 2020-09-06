@@ -4,6 +4,7 @@ import random
 
 from sorts.bubble import bubbleSort
 from sorts.insertion import insertionSort
+from sorts.merge import mergeSort
 
 
 def animate(array, *bars):
@@ -11,18 +12,53 @@ def animate(array, *bars):
         bar.set_height(val)
 
 
+# input length of array
+valid = False
+while not valid:
+
+    inputLength = input("Input Amount: ").lower()
+
+    try:
+        inputLength = int(inputLength)
+
+    except:
+        pass
+
+    if isinstance(inputLength, int):
+        valid = True
+
+    elif 'quit' in inputLength or 'exit' in inputLength:
+        quit()
+    else:
+        print("\nError: Input Not Integer\n")
+
+
 # creates array heights and shuffles
-array = [i for i in range(1, 51)]
+array = [i for i in range(1, inputLength+1)]
 random.shuffle(array)
 
-inputSort = input("Select Sort:\n1. Bubble Sort\n2. Insertion Sort\n")
+# input sort type
+valid = False
+while not valid:
+    inputSort = input(
+        "Select Sort:\n\t1. Bubble Sort\n\t2. Insertion Sort\n\t3. Merge Sort\n").lower()
 
-if inputSort == '1':
-    sort = bubbleSort(array)
-    name = "Bubble"
-elif inputSort == '2':
-    sort = insertionSort(array)
-    name = "Insertion"
+    if inputSort == '1' or 'bub' in inputSort:
+        sort = bubbleSort(array)
+        name = "Bubble"
+        valid = True
+    elif inputSort == '2' or 'insert' in inputSort:
+        sort = insertionSort(array)
+        name = "Insertion"
+        valid = True
+    elif inputSort == '3' or 'mer' in inputSort:
+        sort = mergeSort(array, 0, len(array)-1)
+        name = "Merge"
+        valid = True
+    elif 'quit' in inputSort or 'exit' in inputSort:
+        quit()
+    else:
+        print("\nError: Input Not Recognised\n")
 
 # removes toolbar
 plt.rcParams['toolbar'] = 'None'
@@ -34,16 +70,17 @@ fig, ax = plt.subplots()
 ax.axis('off')
 
 plt.title(f"{name} Sort")
+fig.canvas.set_window_title(f"{name} Sort")
 
 # initialise bar plots
-bars = ax.bar(range(len(array)), array)
+bars = ax.bar(range(inputLength), array)
 
 ani = animation.FuncAnimation(fig, animate, fargs=bars, frames=sort, interval=1,
                               repeat=False)
 
 
 # saves animation to gif
-#writer = animation.PillowWriter(fps=25)
-#ani.save(f'media/{name}.gif', writer=writer)
+# writer = animation.PillowWriter(fps=25)
+# ani.save(f'media/{name}.gif', writer=writer)
 
 plt.show()
