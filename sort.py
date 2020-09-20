@@ -5,6 +5,9 @@ import random
 from sorts.bubble import bubbleSort
 from sorts.insertion import insertionSort
 from sorts.merge import mergeSort
+from sorts.quick import quickSort
+from sorts.bogo import bogoSort
+from sorts.stalin import stalinSort
 
 
 def animate(array, *bars):
@@ -16,7 +19,7 @@ def animate(array, *bars):
 valid = False
 while not valid:
 
-    inputLength = input("Input Amount: ").lower()
+    inputLength = input("Input Number to Sort: ").lower()
 
     try:
         inputLength = int(inputLength)
@@ -41,9 +44,11 @@ random.shuffle(array)
 valid = False
 while not valid:
     inputSort = input(
-        "Select Sort:\n\t1. Bubble Sort\n\t2. Insertion Sort\n\t3. Merge Sort\n").lower()
+        "Select Sort:\n\t1. Bubble Sort\n\t2. Insertion Sort\n\t3. Merge Sort\n\t4. Quick Sort\n\t5. Bogo Sort\n\t6. Stalin Sort\n").lower()
 
-    if inputSort == '1' or 'bub' in inputSort:
+    if 'quit' in inputSort or 'exit' in inputSort:  # before quickSort else 'qui'
+        quit()
+    elif inputSort == '1' or 'bub' in inputSort:
         sort = bubbleSort(array)
         name = "Bubble"
         valid = True
@@ -55,8 +60,18 @@ while not valid:
         sort = mergeSort(array, 0, len(array)-1)
         name = "Merge"
         valid = True
-    elif 'quit' in inputSort or 'exit' in inputSort:
-        quit()
+    elif inputSort == '4' or 'qui' in inputSort:
+        sort = quickSort(array, 0, len(array)-1)
+        name = "Quick"
+        valid = True
+    elif inputSort == '5' or 'bog' in inputSort:
+        sort = bogoSort(array)
+        name = "Bogo"
+        valid = True
+    elif inputSort == '6' or 'stal' in inputSort:
+        sort = stalinSort(array)
+        name = "Stalin"
+        valid = True
     else:
         print("\nError: Input Not Recognised\n")
 
@@ -78,9 +93,8 @@ bars = ax.bar(range(inputLength), array)
 ani = animation.FuncAnimation(fig, animate, fargs=bars, frames=sort, interval=1,
                               repeat=False)
 
-
 # saves animation to gif
-# writer = animation.PillowWriter(fps=25)
-# ani.save(f'media/{name}.gif', writer=writer)
+writer = animation.PillowWriter(fps=25)
+ani.save(f'media/{name}.gif', writer=writer)
 
 plt.show()

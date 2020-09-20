@@ -14,6 +14,18 @@ Sorted is a simple sort visualizer, built using python's matplotlib library.
 
 <img src="./media/Merge.gif" />
 
+## Quick Sort
+
+<img src="./media/Quick.gif" />
+
+## Bogo Sort
+
+<img src="./media/Bogo.gif" />
+
+## Stalin Sort
+
+<img src="./media/Stalin.gif" />
+
 ### Setup
 
 1. Install Python 3.8 or greater
