@@ -1,4 +1,3 @@
-
 def quickSort(array, low, high):
     if low >= high:
         return
@@ -11,8 +10,9 @@ def quickSort(array, low, high):
             array[i], array[count] = array[count], array[i]
             count += 1
         yield array
-    array[high], array[count] = array[count], array[high]
-    yield array
 
+    array[high], array[count] = array[count], array[high]
+
+    yield array
     yield from quickSort(array, low, count - 1)
     yield from quickSort(array, count + 1, high)

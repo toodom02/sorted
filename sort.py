@@ -23,13 +23,11 @@ while not valid:
 
     try:
         inputLength = int(inputLength)
-
     except:
         pass
 
     if isinstance(inputLength, int):
         valid = True
-
     elif 'quit' in inputLength or 'exit' in inputLength:
         quit()
     else:
@@ -44,7 +42,15 @@ random.shuffle(array)
 valid = False
 while not valid:
     inputSort = input(
-        "Select Sort:\n\t1. Bubble Sort\n\t2. Insertion Sort\n\t3. Merge Sort\n\t4. Quick Sort\n\t5. Bogo Sort\n\t6. Stalin Sort\n").lower()
+        '''
+Select Sort:
+    1. Bubble Sort
+    2. Insertion Sort
+    3. Merge Sort
+    4. Quick Sort
+    5. Bogo Sort
+    6. Stalin Sort
+''').lower()
 
     if 'quit' in inputSort or 'exit' in inputSort:  # before quickSort else 'qui'
         quit()
@@ -94,7 +100,7 @@ ani = animation.FuncAnimation(fig, animate, fargs=bars, frames=sort, interval=1,
                               repeat=False)
 
 # saves animation to gif
-writer = animation.PillowWriter(fps=25)
-ani.save(f'media/{name}.gif', writer=writer)
+##writer = animation.PillowWriter(fps=25)
+##ani.save(f'media/{name}.gif', writer=writer)
 
 plt.show()

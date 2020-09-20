@@ -1,4 +1,3 @@
-
 def stalinSort(array):
     last = 0
     for x in range(len(array)-1):
